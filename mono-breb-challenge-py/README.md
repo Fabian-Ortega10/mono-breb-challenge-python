@@ -140,16 +140,3 @@ Centralizado en `services/mono_client.py` y `utils/api_error.py`:
 - Errores de red (timeout, sin conexión) se distinguen de errores de la API
   y se reportan con un mensaje distinto (`MonoAPIError` con
   `code: "network_error"`).
-
-## Diferencias respecto a la versión Node.js
-
-Solo de implementación, no de comportamiento:
-
-- `express` → `Flask` con Blueprints en vez de Routers.
-- `axios` → `requests`, con la misma estrategia de reintento único ante 401.
-- El middleware de errores de Express se traduce a un `@app.errorhandler(Exception)`
-  de Flask que deja pasar los `HTTPException` normales (404/405) y solo
-  convierte a JSON los errores no controlados.
-- El frontend (`public/`) no cambió: es HTML/CSS/JS plano que solo llama a
-  `fetch("/api/...")`, así que funciona igual sin importar si el backend es
-  Node o Python.
