@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mono · Bre-B Participant · Consola de pruebas</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">bb</span>
+      <div>
+        <h1>Bre-B Participant · Consola de pruebas</h1>
+        <p class="subtitle">Tech Support Internship Challenge — Fase 1: Integración</p>
+      </div>
+    </div>
+    <div id="health" class="health">comprobando conexión…</div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>1 · Recaudos</h2>
+        <p>Crear, consultar y listar recaudos (collections) Bre-B.</p>
+      </div>
+
+      <form id="form-recaudo" class="form-row">
+        <input name="nickname" placeholder="Nombre del recaudo (ej. Suscripción mensual)" />
+        <input name="reference" placeholder="Referencia (ej. Pago de julio 2026)" />
+        <select name="usage_mode">
+          <option value="single_use">Uso único</option>
+          <option value="multiple_use">Uso múltiple</option>
+        </select>
+        <input name="amount_pesos" type="number" min="0" step="1" placeholder="Monto en pesos (opcional)" />
+        <button type="submit">Crear recaudo</button>
+      </form>
+      <p class="hint">El monto se ingresa en pesos; el backend lo convierte a centavos antes de enviarlo a la API (ver Caso 4 del análisis de errores).</p>
+
+      <div class="table-toolbar">
+        <button id="btn-refresh-recaudos" class="secondary">↻ Actualizar lista</button>
+        <input id="input-recaudo-id" placeholder="Consultar recaudo por ID (bbcol_...)" />
+        <button id="btn-buscar-recaudo" class="secondary">Buscar</button>
+      </div>
+
+      <div id="recaudo-detalle" class="detail-box hidden"></div>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Nickname</th><th>Estado</th><th>Pagado</th><th>Máx. esperado</th></tr>
+        </thead>
+        <tbody id="tabla-recaudos"><tr><td colspan="5" class="empty">Sin datos aún</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>2 · Transferencias salientes</h2>
+        <p>Enviar dinero por Bre-B y seguir el ciclo de vida completo hasta un estado final.</p>
+      </div>
+
+      <form id="form-transferencia" class="form-row">
+        <input name="key_value" placeholder="Llave Bre-B destino (ej. @MONO1A2B3C4D5E)" required />
+        <input name="amount_pesos" type="number" min="0" step="1" placeholder="Monto en pesos" required />
+        <input name="description" placeholder="Descripción (opcional)" />
+        <button type="submit">Enviar transferencia</button>
+      </form>
+      <p class="hint">La respuesta inicial es "aceptada para procesar", no una confirmación final (ver Caso 2). El estado real se sigue vía consulta y webhooks.</p>
+
+      <div class="table-toolbar">
+        <button id="btn-refresh-transferencias" class="secondary">↻ Actualizar lista</button>
+        <input id="input-transferencia-id" placeholder="Consultar transferencia por ID (bbot_...)" />
+        <button id="btn-buscar-transferencia" class="secondary">Buscar</button>
+      </div>
+
+      <div id="transferencia-detalle" class="detail-box hidden"></div>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>ID</th><th>Destino</th><th>Monto</th><th>Estado</th><th>¿Final?</th></tr>
+        </thead>
+        <tbody id="tabla-transferencias"><tr><td colspan="5" class="empty">Sin datos aún</td></tr></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>3 · Eventos de webhook recibidos</h2>
+        <p>Registro en vivo de los eventos que Mono envía a <code>/api/webhooks</code>.</p>
+      </div>
+      <div class="table-toolbar">
+        <button id="btn-refresh-eventos" class="secondary">↻ Actualizar</button>
+      </div>
+      <ul id="lista-eventos" class="event-log"><li class="empty">Sin eventos recibidos aún</li></ul>
+    </section>
+  </main>
+
+  <footer>
+    Mono Bre-B Participant Sandbox · Consola construida para el Tech Support Internship Challenge
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
