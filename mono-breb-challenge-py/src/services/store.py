@@ -1,6 +1,6 @@
 """
 Almacen en memoria muy simple para los eventos de webhook recibidos.
-Suficiente para el alcance de este reto (demostrar el flujo end-to-end);
+sirve para (demostrar el flujo end-to-end);
 en produccion esto se reemplazaria por una tabla en base de datos y se
 usaria el "id" del evento para deduplicar entregas repetidas del webhook.
 """

@@ -51,7 +51,7 @@ está implementada en la Fase 1 (`src/routes/collections.js`, función
 
 **Evidencia:** `POST /api/v1/outgoing_transfers` responde `202 Accepted`
 con `state: "processing"`. La app registra de inmediato "Transferencia
-exitosa ✅". Minutos después llega el webhook `outgoing_transfer.failed`
+exitosa". Minutos después llega el webhook `outgoing_transfer.failed`
 con `state_reason: "provider_unavailable"`.
 
 ### Causa raíz

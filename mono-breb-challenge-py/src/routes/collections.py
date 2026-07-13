@@ -10,7 +10,7 @@ bp = Blueprint("collections", __name__, url_prefix="/api/recaudos")
 
 # Traduce el "state" real de la API a una etiqueta clara para el usuario.
 #
-# OJO: esta es exactamente la logica que el Caso 1 de la Fase 2 describe
+# Logica que el Caso 1 de la Fase 2 describe
 # como incorrecta ("state != created -> mostrar Pagado"). Aqui se corrige
 # distinguiendo explicitamente "minimum_paid" (pago parcial que ya supero
 # el minimo, pero el recaudo sigue abierto) de "paid" (pago completo).
